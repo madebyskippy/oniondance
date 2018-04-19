@@ -18,25 +18,11 @@ void startscreen(){
 void gamescreen(){
   background(255);
   
-  text("step on this color!!!",width/2,height*5/6);
-  
-  noStroke();
-  fill(colors[colornow*3],colors[colornow*3+1],colors[colornow*3+2]);
-  ellipse(width/2,height/2,200,200); //x,y,w,h
-  fill(255);
-  ellipse(width/2,height/2,inputsize,inputsize); //x,y,w,h
-  
-  fill(0);
-  for (int i=0; i<counter; i++){
-    ellipse(25*2*i+15,height-50,25,25);
+  if (!isPaused){
+    timer = millis()-timestart-timepause;
+  }else{
+    text("paused",width/2,height/2);
   }
-  
-  if (paddown==colornow){
-    timeheld = millis()-timedown;
-  }
-  inputsize = (int)(200 * ((float)(timeheld)/(float)timeinput));
-  
-  timer = millis()-timestart;
   if (timer > colorinterval * counter || inputsize == 200){
     counter ++;
     colornow = int(random(3));

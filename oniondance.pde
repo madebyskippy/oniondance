@@ -8,6 +8,12 @@ int val;      // Data received from the serial port
 boolean arduino = false;
 // -------------------------
 
+boolean onPlatform;
+
+boolean isPaused;
+int timepause;
+int timepausestart;
+
 int timestart;
 int timer;
 
@@ -82,20 +88,12 @@ void keyPressed() {
     }else{
       platformon();
     }
-  }
   } if (key == 'r'){
    //reset
    reset();
    }
 }
 void keyReleased(){
-  if (key == 'a' || key == 'A'){
-    offPad(0);
-  }if (key == 'g' || key == 'G'){
-    offPad(1);
-  }if (key == 'l' || key == 'L'){
-    offPad(2);
-  }
 }
 
 void platformon(){
