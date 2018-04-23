@@ -1,4 +1,5 @@
 import processing.serial.*;
+import processing.video.*;
 import ddf.minim.*;
 
 Serial myPort;  // Create object from Serial class
@@ -7,6 +8,9 @@ int val;      // Data received from the serial port
 // ------------------------- make this true when the arduino is connected
 boolean arduino = false;
 // -------------------------
+
+Capture cam;
+PImage onionpic[] = new PImage[5];
 
 boolean onPlatform;
 
@@ -17,11 +21,17 @@ int timepausestart;
 int timestart;
 int timer;
 
-int[] colors = {150,0,0,    0,150,0,    0,0,150};
-
 int counter;
 
 String mode = "start"; //start, play, end
+
+//sprites
+PImage onion[] = new PImage[4];
+PImage dump;
+PImage bubble;
+
+PFont fontk;
+PFont fonts;
 
 void setup(){
   if (arduino){
@@ -30,14 +40,44 @@ void setup(){
     myPort = new Serial(this, portName, 9600);
   }
   
+  if (true){
+    String[] cameras = Capture.list();
+    
+    if (cameras.length == 0) {
+      println("There are no cameras available for capture.");
+      exit();
+    } else {
+      //println("Available cameras:");
+      //for (int i = 0; i < cameras.length; i++) {
+      //  println(cameras[i]);
+      //}
+      cam = new Capture(this, cameras[0]); 
+      cam.start();     
+    } 
+  }
+  
   frameRate(60);
   
-  PFont font;
-  font = loadFont("Kiddish-48.vlw");
-  textFont(font, 30);
-  textAlign(CENTER,CENTER);
+  fontk = loadFont("Kiddish-100.vlw");
+  fonts = loadFont("DKSnippitySnap-150.vlw");
+  textFont(fonts, 115);
+  textAlign(LEFT,CENTER);
   
-  size (900,600);
+  for (int i=0; i<3; i++){
+    onion[i] = loadImage("onion"+str(i)+".png");
+  }
+  onion[3] = loadImage("onion1.png");
+  
+  for (int i=0; i<onionpic.length; i++){
+    onionpic[i] = loadImage("onionpic.png");
+  }
+  
+  dump = loadImage("dump3.png");
+  bubble = loadImage("bubble.png");
+  //onionpic = loadImage("onionpic.png"); //temporary
+  
+  //size (1600,900);
+  fullScreen();
   reset();
 }
 
@@ -46,9 +86,6 @@ void reset(){
   timer = 0;
   timestart = millis();
   counter = 1;
-  colornow = int(random(3));
-  inputsize = 0;
-  paddown = -1;
   timeheld = 0;
   fill(0);
 }
@@ -103,8 +140,12 @@ void platformon(){
     timepause += millis()-timepausestart;
     println("unpausing "+str(timepause));
   }
-  if (mode == "start" || mode == "end"){
+  if (mode == "start"){
+    reset();
     mode = "play";
+  }
+  if (mode == "end"){
+    mode = "start";
   }
 }
 

@@ -30,3 +30,36 @@ void timerdraw(float total){
         size/2*0.9f*sin(angle*i-PI/2)+x,size/2*0.9f*cos(angle*i-PI/2)+y);
   }
 }
+
+int frametime = (int)(1000/6);
+int frametimer=millis();
+int frame=0;
+
+void oniondraw(){
+  if (millis()-frametimer > frametime){
+    frametimer = millis();
+    frame = (frame+1)%4;
+  }
+  
+  image(onion[frame],width-onion[0].width*1.1,height-onion[0].height*1.1);
+}
+
+int bcounter = 0;
+int change = 1;
+void backgroundpattern(){
+  int size = 30;
+  color c = color(150,100,0,50);
+  fill(c);
+  noStroke();
+  float x,y;
+  
+  if (bcounter > 10) bcounter = 0;
+  bcounter += change;
+  for (int i=0; i<20; i++){
+    for (int j=0; j<20; j++){
+      x = 5+size/2+(size*1.5*(j%2))+size*i*3;
+      y = height-size*1.5-size*j*3;
+      ellipse(x+bcounter*(size*1.5)/10,y+bcounter*(size*3/10),size,size);
+    }
+  }
+}
