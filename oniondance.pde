@@ -27,8 +27,11 @@ String mode = "start"; //start, play, end
 
 //sprites
 PImage onion[] = new PImage[4];
-PImage dump;
+PImage dump[] = new PImage[3];
 PImage bubble;
+
+PImage oniononion[] = new PImage[3];
+PImage onionguy[] = new PImage[8];
 
 PFont fontk;
 PFont fonts;
@@ -67,12 +70,20 @@ void setup(){
     onion[i] = loadImage("onion"+str(i)+".png");
   }
   onion[3] = loadImage("onion1.png");
+  for (int i=0; i<oniononion.length; i++){
+    oniononion[i] = loadImage("oniononion"+str(i)+".png");
+  }
+  for (int i=0; i<onionguy.length; i++){
+    onionguy[i] = loadImage("onionguy"+str(i)+".png");
+  }
   
   for (int i=0; i<onionpic.length; i++){
     onionpic[i] = loadImage("onionpic.png");
   }
   
-  dump = loadImage("dump3.png");
+  dump[0] = loadImage("dump3.png");
+  dump[1] = loadImage("dump1.png");
+  dump[2] = loadImage("dump4.png");
   bubble = loadImage("bubble.png");
   //onionpic = loadImage("onionpic.png"); //temporary
   
