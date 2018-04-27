@@ -30,7 +30,7 @@ String mode = "start"; //start, play, end
 //sprites
 PImage onion[] = new PImage[4];
 PImage dump[] = new PImage[3];
-PImage bubble;
+PImage bubble[] = new PImage[5];
 
 PImage oniononion[] = new PImage[3];
 PImage onionguy[] = new PImage[8];
@@ -80,14 +80,16 @@ void setup(){
   }
   
   for (int i=0; i<onionpic.length; i++){
-    onionpic[i] = loadImage("onionpic.png");
+    onionpic[i] = loadImage("onionpic.png"); //temporary
   }
   
   dump[0] = loadImage("dump3.png");
   dump[1] = loadImage("dump1.png");
   dump[2] = loadImage("dump4.png");
-  bubble = loadImage("bubble.png");
-  //onionpic = loadImage("onionpic.png"); //temporary
+  
+  for (int i=0; i<bubble.length; i++){
+    bubble[i] = loadImage("bubble"+str(i)+".png");
+  }
   
   frameRate(30);
   //size (1600,900);

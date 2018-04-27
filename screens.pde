@@ -5,14 +5,15 @@ int timeheld;
 
 void startscreen(){
   textFont(fonts,130);
+  textAlign(LEFT,CENTER);
   fill(255);
   text("Onion Dance",500,height*4/5);
   fill(100,50,0);
   text("Onion Dance",500,height*4/5);
   image(dump[0],width/2-800,10);
-  image(bubble,width/2-800+dump[0].width,75);
+  image(bubble[0],width/2-800+dump[0].width,75);
   textFont(fontk,50);
-  text("asdflkajflkfngslk yea yea whatever onions",width/2-800+dump[0].width+100,150);
+  text("You have one minute to be the biggest onion you can be!\nAdd lots of onion layers! Put the skin on last!",width/2-800+dump[0].width+100,175);
   image(onionpic[0],50,height/2-200,400,533);
   for (int i=0; i<4; i++){
     image(onionpic[i+1],500+325*i,height/2-200,300,400);
@@ -51,10 +52,22 @@ void gamescreen(){
   image(c,-c.width-(width/2-c.width/2),height/2-c.height/2);
   popMatrix();
   
-  image(onionguy[1],width/2-c.width/2-onionguy[1].width*6/7,height-c.height-onionguy[1].height/2);
+  textAlign(CENTER,CENTER);
+  textFont(fonts,40);
+  fill(100,50,0);
+  image(onionguy[1],width/2-c.width/2-onionguy[1].width*6/7,height-c.height-onionguy[1].height/3);
   image(onionguy[0],width/2+c.width/2-onionguy[0].width*1/7,height-onionguy[0].height-50);
   image(dump[2],-1*dump[2].width*1/4,height-dump[2].height*3/4);
+  image(bubble[2],dump[2].width*3/5,height-dump[2].height*3/4);
+  text("Be a",dump[2].width*3/5+bubble[2].width/2,height-dump[2].height*3/4+bubble[2].height/2-65);
+  textSize(60);
+  text("BIG",dump[2].width*3/5+bubble[2].width/2,height-dump[2].height*3/4+bubble[2].height/2-27);
+  textSize(40);
+  text("onion!",dump[2].width*3/5+bubble[2].width/2,height-dump[2].height*3/4+bubble[2].height/2+10);
   image(dump[1],width-dump[1].width*3/4,dump[1].height*1/7);
+  image(bubble[3],width-dump[1].width*3/4-bubble[3].width,dump[1].height*1/7);
+  textLeading(40);
+  text("put the\nskin on\nlast!",width-dump[1].width*3/4-bubble[3].width*4/7,dump[1].height*1/7+bubble[3].height/2);
   
   if (timer > timeend){
     onionpic[4]=onionpic[3];
