@@ -4,15 +4,13 @@ int timedown;
 int timeheld;
 
 void startscreen(){
-  background(255,240,215);
-  backgroundpattern();
   textFont(fonts,130);
   fill(255);
   text("Onion Dance",500,height*4/5);
   fill(100,50,0);
   text("Onion Dance",500,height*4/5);
   image(dump[0],width/2-800,10);
-  image(bubble,width/2-800+dump[0].width,50);
+  image(bubble,width/2-800+dump[0].width,75);
   textFont(fontk,50);
   text("asdflkajflkfngslk yea yea whatever onions",width/2-800+dump[0].width+100,150);
   image(onionpic[0],50,height/2-200,400,533);
@@ -20,11 +18,10 @@ void startscreen(){
     image(onionpic[i+1],500+325*i,height/2-200,300,400);
   }
   oniondraw();
+  borderdraw();
 }
 
 void gamescreen(){
-  background(255,240,215);
-  backgroundpattern();
   
   if (!isPaused){
     timer = millis()-timestart-timepause;
@@ -32,13 +29,22 @@ void gamescreen(){
     text("paused",width/2,height/2);
   }
   
- if (cam.available() == true) {
-    cam.read();
+  int h;
+  int w;
+  PImage c;
+  if (camon){
+    if (cam.available() == true) {
+      cam.read();
+    }
+    h = cam.height;
+    w = (int)cam.height/4*3;
+    c = cam.get(cam.width/2-w/2,0,w,h);
+  }else{
+    h = 800;
+    w = 600;
+    c = loadImage("onionpic.png");
   }
   
-  int h = cam.height;
-  int w = (int)cam.height/4*3;
-  PImage c = cam.get(cam.width/2-w/2,0,w,h);
   //image(c,0,0);
   pushMatrix();
   scale(-1.0, 1.0);
@@ -59,21 +65,27 @@ void gamescreen(){
     saveFrame("data/"+str(year())+str(month())+str(day())+"-"+str(hour())+str(minute())+".jpg"); 
     mode = "end";
   }
+  borderdraw();
   timerdraw((float)timeend);
   fill(0);
 }
 
 void endscreen(){
-  background(255,240,215);
-  backgroundpattern();
-  text("nice onion",width/2,height/2);
+  textFont(fonts,75);
+  fill(100,50,0);
+  textAlign(CENTER,CENTER);
+  text("Hm...",width/5,height/5);
+  text("yea...",width/5,height/5+75);
+  text("nice...",width/5,height/5+200);
+  text("Nice onion.",width*5/6,height/3);
   image(onionpic[0],width/2-onionpic[0].width/2,height/2-onionpic[0].height/2);
   
   int cwidth = onionpic[0].width;
-  image(onionguy[2],width/2-cwidth/2-onionguy[2].width*2,height-onionguy[2].height-50);
-  image(onionguy[3],width/2-cwidth/2-onionguy[3].width*1.5,height-onionguy[3].height-50);
-  image(onionguy[4],width/2-cwidth/2-onionguy[4].width*0.75,height-onionguy[4].height-50);
-  image(onionguy[5],width/2+cwidth/2+onionguy[5].width*-.25,height-onionguy[5].height-50);
-  image(onionguy[6],width/2+cwidth/2+onionguy[6].width*0.5,height-onionguy[6].height-50);
-  image(onionguy[7],width/2+cwidth/2+onionguy[7].width*1.25,height-onionguy[7].height-50);
+  image(onionguy[2],width/2-cwidth/2-onionguy[2].width*2,height-onionguy[2].height-100);
+  image(onionguy[3],width/2-cwidth/2-onionguy[3].width*1.5,height-onionguy[3].height-100);
+  image(onionguy[4],width/2-cwidth/2-onionguy[4].width*0.75,height-onionguy[4].height-100);
+  image(onionguy[5],width/2+cwidth/2+onionguy[5].width*-.25,height-onionguy[5].height-100);
+  image(onionguy[6],width/2+cwidth/2+onionguy[6].width*0.5,height-onionguy[6].height-100);
+  image(onionguy[7],width/2+cwidth/2+onionguy[7].width*1.25,height-onionguy[7].height-100);
+  borderdraw();
 }

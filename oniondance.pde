@@ -7,6 +7,8 @@ int val;      // Data received from the serial port
 
 // ------------------------- make this true when the arduino is connected
 boolean arduino = false;
+// ------------------------- for debugging cus opening webcam takes forever
+boolean camon = false;
 // -------------------------
 
 Capture cam;
@@ -43,7 +45,7 @@ void setup(){
     myPort = new Serial(this, portName, 9600);
   }
   
-  if (true){
+  if (camon){
     String[] cameras = Capture.list();
     
     if (cameras.length == 0) {
@@ -87,6 +89,7 @@ void setup(){
   bubble = loadImage("bubble.png");
   //onionpic = loadImage("onionpic.png"); //temporary
   
+  frameRate(30);
   //size (1600,900);
   fullScreen();
   reset();
@@ -117,6 +120,8 @@ void draw(){
     }
   }
   
+  background(255,240,215);
+  backgroundpattern();
   if (mode=="start"){
     //intro game and show instructions
     startscreen();
