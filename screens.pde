@@ -13,7 +13,7 @@ void startscreen(){
   image(dump[0],width/2-800,10);
   image(bubble[0],width/2-800+dump[0].width,75);
   textFont(fontk,50);
-  text("You have one minute to be the biggest onion you can be!\nAdd lots of onion layers! Put the skin on last!",width/2-800+dump[0].width+100,175);
+  text("You have one minute to be the biggest onion you can be!",width/2-800+dump[0].width+100,175);
   image(onionpic[0],50,height/2-200,400,533);
   for (int i=0; i<4; i++){
     image(onionpic[i+1],500+325*i,height/2-200,300,400);
@@ -74,8 +74,19 @@ void gamescreen(){
     onionpic[3]=onionpic[2];
     onionpic[2]=onionpic[1];
     onionpic[1]=onionpic[0];
-    onionpic[0] = c;
-    saveFrame("data/"+str(year())+str(month())+str(day())+"-"+str(hour())+str(minute())+".jpg"); 
+    onionpic[0] = c.get();
+    c.save("data/pix/"+str(year())+str(month())+str(day())+"-"+str(hour())+str(minute())+".jpg");
+    c.loadPixels();
+    pictureframe.resize(c.width,c.height);
+    pictureframe.loadPixels();
+    for (int i=0; i<c.pixels.length; i++){
+      if (pictureframe.pixels[i] != 0){
+        c.pixels[i] = pictureframe.pixels[i];
+      }
+    }
+    c.updatePixels();
+    c.save("data/tweets/Check out this onion! "+str(month())+"-"+str(day())+"-"+str(year())+", "+str(hour())+":"+str(minute())+".jpg");
+    saveFrame("data/screenshot/"+str(year())+str(month())+str(day())+"-"+str(hour())+str(minute())+".jpg"); 
     mode = "end";
   }
   borderdraw();

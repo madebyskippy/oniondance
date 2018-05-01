@@ -8,7 +8,9 @@ int val;      // Data received from the serial port
 // ------------------------- make this true when the arduino is connected
 boolean arduino = false;
 // ------------------------- for debugging cus opening webcam takes forever
-boolean camon = false;
+boolean camon = true;
+// -------------------------
+boolean istweeting = true;
 // -------------------------
 
 Capture cam;
@@ -35,6 +37,8 @@ PImage bubble[] = new PImage[5];
 PImage oniononion[] = new PImage[3];
 PImage onionguy[] = new PImage[8];
 
+PImage pictureframe;
+
 PFont fontk;
 PFont fonts;
 
@@ -52,11 +56,11 @@ void setup(){
       println("There are no cameras available for capture.");
       exit();
     } else {
-      //println("Available cameras:");
-      //for (int i = 0; i < cameras.length; i++) {
-      //  println(cameras[i]);
-      //}
-      cam = new Capture(this, cameras[0]); 
+      println("Available cameras:");
+      for (int i = 0; i < cameras.length; i++) {
+        println(cameras[i]);
+      }
+      cam = new Capture(this, cameras[0]);//15]); 
       cam.start();     
     } 
   }
@@ -89,6 +93,12 @@ void setup(){
   
   for (int i=0; i<bubble.length; i++){
     bubble[i] = loadImage("bubble"+str(i)+".png");
+  }
+  
+  pictureframe = loadImage("photoframe.png");
+  
+  if (istweeting){
+    setupTwitterer();
   }
   
   frameRate(30);
@@ -134,13 +144,15 @@ void draw(){
     //results
     endscreen();
   }
+  
+  if (istweeting){
+    checkTwitterer();
+  }
 }
 
 void keyPressed() {
   if (key == ' ') {
-    if (onPlatform){
-      platformoff();
-    }else{
+    if (!onPlatform){
       platformon();
     }
   } if (key == 'r'){
@@ -149,15 +161,20 @@ void keyPressed() {
    }
 }
 void keyReleased(){
+  if (key == ' ') {
+    if (onPlatform){
+      platformoff();
+    }
+  }
 }
 
 void platformon(){
   onPlatform = true;
-  if (mode == "play"){
-    isPaused = false;
-    timepause += millis()-timepausestart;
-    println("unpausing "+str(timepause));
-  }
+  //if (mode == "play"){
+  //  isPaused = false;
+  //  timepause += millis()-timepausestart;
+  //  println("unpausing "+str(timepause));
+  //}
   if (mode == "start"){
     reset();
     mode = "play";
@@ -169,9 +186,9 @@ void platformon(){
 
 void platformoff(){
   onPlatform = false;
-  if (mode == "play"){
-    println("pausing");
-    isPaused = true;
-    timepausestart = millis();
-  }
+  //if (mode == "play"){
+  //  println("pausing");
+  //  isPaused = true;
+  //  timepausestart = millis();
+  //}
 }
