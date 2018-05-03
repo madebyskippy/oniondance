@@ -69,7 +69,23 @@ void gamescreen(){
   textLeading(40);
   text("put the\nskin on\nlast!",width-dump[1].width*3/4-bubble[3].width*4/7,dump[1].height*1/7+bubble[3].height/2);
   
+  if (timer > timeend-3000 && beepPlayed == 0){
+    beepPlayed = 1;
+    beep_noise.rewind();
+    beep_noise.play();
+  }if (timer > timeend-2000 && beepPlayed == 1){
+    beepPlayed = 2;
+    beep_noise.rewind();
+    beep_noise.play();
+  }if (timer > timeend-1000 && beepPlayed == 2){
+    beepPlayed = 3;
+    beep_noise.rewind();
+    beep_noise.play();
+  }
+  
   if (timer > timeend){
+    ding_noise.rewind();
+    ding_noise.play();
     onionpic[4]=onionpic[3];
     onionpic[3]=onionpic[2];
     onionpic[2]=onionpic[1];

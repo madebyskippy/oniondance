@@ -13,6 +13,10 @@ boolean camon = true;
 boolean istweeting = false;
 // -------------------------
 
+Minim minim;
+AudioPlayer ding_noise, beep_noise;
+int beepPlayed;
+
 Capture cam;
 PImage onionpic[] = new PImage[5];
 
@@ -101,6 +105,10 @@ void setup(){
     setupTwitterer();
   }
   
+  minim = new Minim(this);
+  ding_noise = minim.loadFile("side8.mp3");
+  beep_noise = minim.loadFile("scor.mp3");
+  
   frameRate(30);
   //size (1600,900);
   fullScreen();
@@ -113,6 +121,7 @@ void reset(){
   timestart = millis();
   counter = 1;
   timeheld = 0;
+  beepPlayed = 0;
   fill(0);
 }
 
