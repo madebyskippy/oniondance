@@ -1,4 +1,4 @@
-int timeend = 5*1000; // in milliseconds
+int timeend = 60*1000; // in milliseconds
 
 int timedown;
 int timeheld;

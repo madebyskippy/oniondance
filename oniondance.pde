@@ -10,7 +10,7 @@ boolean arduino = false;
 // ------------------------- for debugging cus opening webcam takes forever
 boolean camon = true;
 // -------------------------
-boolean istweeting = true;
+boolean istweeting = false;
 // -------------------------
 
 Capture cam;
@@ -84,7 +84,7 @@ void setup(){
   }
   
   for (int i=0; i<onionpic.length; i++){
-    onionpic[i] = loadImage("onionpic.png"); //temporary
+    onionpic[i] = loadImage("pix/onionpic"+str(i)+".png");
   }
   
   dump[0] = loadImage("dump3.png");
