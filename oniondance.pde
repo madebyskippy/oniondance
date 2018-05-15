@@ -8,7 +8,7 @@ int val;      // Data received from the serial port
 // ------------------------- make this true when the arduino is connected
 boolean arduino = false;
 // ------------------------- for debugging cus opening webcam takes forever
-boolean camon = true;
+boolean camon = false;
 // -------------------------
 boolean istweeting = false;
 // -------------------------
@@ -87,10 +87,12 @@ void setup(){
     onionguy[i] = loadImage("onionguy"+str(i)+".png");
   }
   
-  for (int i=0; i<onionpic.length; i++){
-    onionpic[i] = loadImage("pix/onionpic"+str(i)+".png");
-  }
-  
+  onionpic[0] = loadImage("pix/onionpic9.jpg");
+  onionpic[1] = loadImage("pix/onionpic8.jpg");
+  onionpic[2] = loadImage("pix/onionpic7.jpg");
+  onionpic[3] = loadImage("pix/onionpic6.jpg");
+  onionpic[4] = loadImage("pix/onionpic5.jpg");
+ 
   dump[0] = loadImage("dump3.png");
   dump[1] = loadImage("dump1.png");
   dump[2] = loadImage("dump4.png");
@@ -106,8 +108,8 @@ void setup(){
   }
   
   minim = new Minim(this);
-  ding_noise = minim.loadFile("side8.mp3");
-  beep_noise = minim.loadFile("scor.mp3");
+  ding_noise = minim.loadFile("sound-beepclean-up.wav");
+  beep_noise = minim.loadFile("sound-beepclean.wav");
   
   frameRate(30);
   //size (1600,900);

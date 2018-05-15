@@ -1,4 +1,4 @@
-int timeend = 60*1000; // in milliseconds
+int timeend = 10*1000; // in milliseconds
 
 int timedown;
 int timeheld;
@@ -13,7 +13,7 @@ void startscreen(){
   image(dump[0],width/2-800,10);
   image(bubble[0],width/2-800+dump[0].width,75);
   textFont(fontk,50);
-  text("You have one minute to be the biggest onion you can be!",width/2-800+dump[0].width+100,175);
+  text("You have one minute to be the tastiest onion you can be!",width/2-800+dump[0].width+100,175);
   image(onionpic[0],50,height/2-200,400,533);
   for (int i=0; i<4; i++){
     image(onionpic[i+1],500+325*i,height/2-200,300,400);
