@@ -104,7 +104,7 @@ void setup(){
   pictureframe = loadImage("photoframe.png");
   
   if (istweeting){
-    setupTwitterer();
+    //setupTwitterer();
   }
   
   minim = new Minim(this);
@@ -125,6 +125,7 @@ void reset(){
   timeheld = 0;
   beepPlayed = 0;
   fill(0);
+  timejump = 0;
 }
 
 void draw(){
@@ -157,7 +158,7 @@ void draw(){
   }
   
   if (istweeting){
-    checkTwitterer();
+    //checkTwitterer();
   }
 }
 
@@ -189,6 +190,11 @@ void platformon(){
   if (mode == "start"){
     reset();
     mode = "play";
+  }
+  if (mode == "play"){
+    if (timer > (timeend/2)){
+      timejump = timeend - timer -3500;
+    }
   }
   if (mode == "end"){
     mode = "start";

@@ -2,6 +2,7 @@ int timeend = 10*1000; // in milliseconds
 
 int timedown;
 int timeheld;
+int timejump;
 
 void startscreen(){
   textFont(fonts,130);
@@ -20,12 +21,16 @@ void startscreen(){
   }
   oniondraw();
   borderdraw();
+  fill(100,50,0);
+  textAlign(CENTER,CENTER);
+  textFont(fonts,40);
+  text("Press the onion to start!",width/2,height-75);
 }
 
 void gamescreen(){
   
   if (!isPaused){
-    timer = millis()-timestart-timepause;
+    timer = millis()-timestart-timepause+timejump;
   }else{
     text("paused",width/2,height/2);
   }
@@ -83,6 +88,11 @@ void gamescreen(){
     beep_noise.play();
   }
   
+  if (timer > (timeend/2)){
+    textFont(fonts,40);
+    text("Press the onion to end early!",width/2,height-75);
+  }
+  
   if (timer > timeend){
     ding_noise.rewind();
     ding_noise.play();
@@ -128,4 +138,7 @@ void endscreen(){
   image(onionguy[6],width/2+cwidth/2+onionguy[6].width*0.5,height-onionguy[6].height-100);
   image(onionguy[7],width/2+cwidth/2+onionguy[7].width*1.25,height-onionguy[7].height-100);
   borderdraw();
+  textFont(fonts,40);
+  fill(100,50,0);
+  text("Press the onion to play again!",width/2,height-75);
 }
